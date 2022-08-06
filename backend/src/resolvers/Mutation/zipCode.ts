@@ -3,10 +3,22 @@ import { zipCodeInterface } from '../../interfaces/zipCode'
 
 module.exports = {
   async newZipcode(_: any,{ data }: { data: zipCodeInterface }) {
-    const [ zipcode ] = await db('zipcodes')
-      .insert(data)
-      .returning('*')
+    try {
+      const [ zipcode ] = await db('zipcodes')
+        .insert(data)
+        .returning('*')
 
-    return zipcode;
+      return zipcode;
+    } catch (error) {
+      console.log(error);
+    }
   },
+  async clearHistory() {
+    try {
+      await db('zipcodes').delete()
+      return "Clear your search history"
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

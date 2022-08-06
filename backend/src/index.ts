@@ -1,6 +1,5 @@
 const { ApolloServer, gql } = require('apollo-server')
 const resolvers = require('./resolvers')
-// const typeDefs = require('./schema')
 
 const typeDefs = gql`
   scalar Date
@@ -16,6 +15,7 @@ const typeDefs = gql`
 
   type Query {
     lastFiveSearches: [Zipcode]
+    searchZippopotam(country: String, zip: String): Zipcode
   }
 
   input zipInput {
@@ -28,6 +28,7 @@ const typeDefs = gql`
 
   type Mutation {
     newZipcode(data: zipInput!): Zipcode!
+    clearHistory: Zipcode
   }
 `
 

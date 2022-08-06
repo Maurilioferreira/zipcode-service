@@ -1,4 +1,0 @@
-#import Zipcode, Place from 'Zipcode.graphql'
-#import Query from 'Query.graphql'
-
-scalar Date
