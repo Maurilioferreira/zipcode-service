@@ -1,0 +1,16 @@
+type Zipcode {
+  id: ID!
+  country: String
+  countryAbbreviation: String
+  zip: String
+  places: [Place]
+  created: Date
+}
+
+type Place {
+  placeName: String
+  state: String
+  stateAbbreviation: String
+  longitude: String
+  latitude: String
+}

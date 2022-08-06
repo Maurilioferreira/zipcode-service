@@ -1,69 +1,36 @@
 const { ApolloServer, gql } = require('apollo-server')
+const resolvers = require('./resolvers')
+// const typeDefs = require('./schema')
 
 const typeDefs = gql`
   scalar Date
 
   type Zipcode {
-    id: ID!
+    id: ID
     country: String
     countryAbbreviation: String
     zip: String
-    places: [Place]
+    places: String
     created: Date
   }
 
-  type Place {
-    placeName: String
-    state: String
-    stateAbbreviation: String
-    longitude: String
-    latitude: String
+  type Query {
+    lastFiveSearches: [Zipcode]
   }
 
-  type Query {
-    zipCodeSearch: [Zipcode]
+  input zipInput {
+    country: String!
+    countryAbbreviation: String!
+    zip: String!
+    places: String!
+    created: Date!
+  }
+
+  type Mutation {
+    newZipcode(data: zipInput!): Zipcode!
   }
 `
 
-const resolvers = {
-  Query: {
-    zipCodeSearch() {
-      return [{
-        id: 1,
-        country: "United States",
-        countryAbbreviation: "US",
-        zip: "90210",
-        places: [
-          {
-            placeName: "Beverly Hills",
-            longitude: "-118.4065",
-            state: "California",
-            stateAbbreviation: "CA",
-            latitude: "34.0901"
-          }
-        ],
-        created: new Date()
-      },
-      {
-        id: 2,
-        country: "United States",
-        countryAbbreviation: "US",
-        zip: "00210",
-        places: [
-          {
-            placeName: "Portsmouth",
-            longitude: "-71.0132",
-            state: "New Hampshire",
-            stateAbbreviation: "NH",
-            latitude: "43.0059"
-          }
-        ],
-        created: new Date()
-      }
-    ]
-    },
-  }
-}
 
 const server = new ApolloServer({
   typeDefs,
