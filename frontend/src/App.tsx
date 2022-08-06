@@ -10,7 +10,7 @@ import TableItem from './TableItem'
 
 const GET_LOCATIONS = gql`
   {
-  zipCodeSearch {
+  lastFiveSearches {
     id
     country
     countryAbbreviation
