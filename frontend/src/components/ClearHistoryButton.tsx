@@ -1,4 +1,5 @@
 import { gql, useMutation } from '@apollo/client';
+import Button from 'react-bootstrap/Button';
 
 const ADD_SEARCH = gql`
   mutation ClearHistory {
@@ -9,7 +10,7 @@ const ADD_SEARCH = gql`
 `;
 
 
-function AddSearch(): JSX.Element {
+function ClearHistoryButton(): JSX.Element {
   let input: any;
   const [addTodo, { data, loading, error }] = useMutation(ADD_SEARCH);
 
@@ -25,6 +26,12 @@ function AddSearch(): JSX.Element {
           input.value = '';
         }}
       >
+        <Button
+          variant="danger"
+          onClick={() => console.log('oi')}
+        >
+          Clear history
+        </Button>
         <input
           ref={node => {
             input = node;
@@ -36,4 +43,4 @@ function AddSearch(): JSX.Element {
   );
 }
 
-export default AddSearch;
+export default ClearHistoryButton;
