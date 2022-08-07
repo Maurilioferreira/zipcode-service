@@ -6,6 +6,8 @@ You can search for the zip code and the system will return city and state data.
 
 The system displays the last 5 codes searched, and allows the user to clear this history.
 
+![Zipcode service](https://github.com/Maurilioferreira/zipcode-service/blob/main/zipcode.png)
+
 ## Pre-Requisites
 
 Docker, Docker Compose, NodeJS v14.20.0
