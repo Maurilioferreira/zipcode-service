@@ -12,20 +12,11 @@ export interface LoadProps {
 function TableItem(props:any) {
   const { loading, error, data } = props;
 
-  console.log(loading)
-  console.log(error)
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-  console.log(data);
-  
+
   const tableItems = data.lastFiveSearches.map((data: LoadProps) => {
-    // const [ place ] = data.places;
     const [ place ] = JSON.parse(data.places);
-    // console.log(data)
-    // console.log('data.places => ',data.places)
-    console.log('place => ', place);
-    // console.log('longitude => ',place.longitude)
-    // console.log(place['place name'])
     return (
       <tr key={data.id}>
         <td>{data.id}</td>
@@ -40,23 +31,28 @@ function TableItem(props:any) {
   )});
 
   return (
-    <Table striped>
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>zip</th>
-          <th>country</th>
-          <th>country Abbreviation</th>
-          <th>place name</th>
-          <th>state</th>
-          <th>latitude</th>
-          <th>longitude</th>
-        </tr>
-      </thead>
-      <tbody>
-        {tableItems}
-      </tbody>
-    </Table>
+    <>
+      <h2>
+        Last five searches
+      </h2>
+      <Table striped>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>zip</th>
+            <th>country</th>
+            <th>country Abbreviation</th>
+            <th>place name</th>
+            <th>state</th>
+            <th>latitude</th>
+            <th>longitude</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tableItems}
+        </tbody>
+      </Table>
+    </>
   );
 }
 

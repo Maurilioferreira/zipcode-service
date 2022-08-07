@@ -9,37 +9,20 @@ const ADD_SEARCH = gql`
   }
 `;
 
-
-function ClearHistoryButton(): JSX.Element {
-  let input: any;
-  const [addTodo, { data, loading, error }] = useMutation(ADD_SEARCH);
+function ClearHistoryButton(props: any): JSX.Element {
+  const { refetchAllData } = props;
+  const [clearHistory, { data, loading, error }] = useMutation(ADD_SEARCH);
 
   if (loading) return <p>'Submitting...'</p>;
   if (error) return <p>`Submission error! ${error.message}`</p>;
 
   return (
-    <div>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          addTodo({ variables: { type: input.value } });
-          input.value = '';
-        }}
+      <Button
+        variant="danger"
+        onClick={() => clearHistory().then(() => refetchAllData())}
       >
-        <Button
-          variant="danger"
-          onClick={() => console.log('oi')}
-        >
-          Clear history
-        </Button>
-        <input
-          ref={node => {
-            input = node;
-          }}
-        />
-        <button type="submit">Add Todo</button>
-      </form>
-    </div>
+        Clear history
+      </Button>
   );
 }
 

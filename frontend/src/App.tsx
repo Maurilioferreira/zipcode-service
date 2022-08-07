@@ -2,9 +2,6 @@ import { useQuery, gql } from '@apollo/client';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-// import Badge from 'react-bootstrap/Badge';
-import AddSearch from './AddSearch';
 import FormSearch from './components/FormSearch';
 import TableItem from './components/TableItem'
 import ClearHistoryButton from './components/ClearHistoryButton'
@@ -22,14 +19,16 @@ const GET_ZIPCODE = gql`
 `;
 
 export default function App() {
-  const { loading, error, data } = useQuery(GET_ZIPCODE);
+  const { loading, error, data, refetch } = useQuery(GET_ZIPCODE);
 
-  const searchBarProps = {
+  const tableItemProps = {
     loading,
     error,
     data
   }
-
+  const refetchProps = {
+    refetchAllData: refetch,
+  }
   return (
     <Container>
       <Row>
@@ -39,20 +38,19 @@ export default function App() {
           </h1>
         </Col>
       </Row>
-      
       <Row>
         <Col>
-          <FormSearch />
+          <FormSearch {...refetchProps} />
         </Col>
       </Row>
       <Row>
         <Col>
-          <ClearHistoryButton />
+          <TableItem {...tableItemProps} />
         </Col>
       </Row>
       <Row>
-      <Col>
-          <TableItem {...searchBarProps} />
+        <Col>
+          <ClearHistoryButton  {...refetchProps}/>
         </Col>
       </Row>
     </Container>
