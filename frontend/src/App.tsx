@@ -3,10 +3,10 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import FormSearch from './components/FormSearch';
-import TableItem from './components/TableItem'
+import TableList from './components/TableList'
 import ClearHistoryButton from './components/ClearHistoryButton'
 
-const GET_ZIPCODE = gql`
+export const GET_ZIPCODE = gql`
   {
   lastFiveSearches {
     id
@@ -45,7 +45,7 @@ export default function App() {
       </Row>
       <Row>
         <Col>
-          <TableItem {...tableItemProps} />
+          <TableList {...tableItemProps} />
         </Col>
       </Row>
       <Row>

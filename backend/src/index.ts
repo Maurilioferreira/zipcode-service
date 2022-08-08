@@ -1,5 +1,6 @@
 const { ApolloServer, gql } = require('apollo-server')
 const resolvers = require('./resolvers')
+const { startDb } = require('./config/start')
 
 const typeDefs = gql`
   scalar Date
@@ -39,5 +40,6 @@ const server = new ApolloServer({
 })
 
 server.listen().then(() => {
+  startDb();
   console.log(`Listening in http://localhost:4000`)
 })

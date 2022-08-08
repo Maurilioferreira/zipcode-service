@@ -7,11 +7,11 @@
  module.exports = {
   client: 'postgresql',
   connection: {
-    host: 'localhost',
+    host: 'host.docker.internal',
     port: 5432,
-    database: 'zipcode',
-    user:     'postgres',
-    password: '123456'
+    database: 'postgres',
+    user:     'root',
+    password: 'password'
   },
   pool: {
     min: 2,

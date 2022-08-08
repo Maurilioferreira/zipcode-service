@@ -1,0 +1,50 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:13.1
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - APP_DB_USER=docker
+      - APP_DB_PASS=docker
+      - APP_DB_NAME=docker
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+    ports:
+      - 5432:5432
+  app:
+    depends_on:
+      - postgres
+    restart: on-failure
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./backend
+    ports:
+      - '4000:4000'
+    volumes:
+      - /app/node_modules
+      - ./backend:/app
+  frontend:
+    depends_on:
+      - app
+    restart: on-failure
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./frontend
+    ports:
+      - '3000:3000'
+    volumes:
+      - /frontend/node_modules
+      - ./frontend:/frontend
+
+# docker-compose up
+# docker-compose up --build
+# docker-compose up -d
+# docker-compose down
+# docker-compose ps

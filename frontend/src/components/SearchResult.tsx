@@ -1,4 +1,6 @@
 import Table from 'react-bootstrap/Table';
+import TableItem from './TableItem';
+import TableHead from './TableHead';
 
 function SearchResult(props: any) {
   const { loading, error, data } = props;
@@ -8,36 +10,18 @@ function SearchResult(props: any) {
   if(!data) return <p></p>;
   if(!data.searchZippopotam) return <p></p>;
 
-  const { id, zip, country, countryAbbreviation, places } = data.searchZippopotam;
-  const [ place ] = JSON.parse(places);
+  const { id } = data.searchZippopotam;
   const tableItem = [];
+  const tableItemProps = {
+    data: data.searchZippopotam
+  }
   tableItem.push(
-      <tr key={id}>
-        <td>{id}</td>
-        <td>{zip}</td>
-        <td>{country}</td>
-        <td>{countryAbbreviation}</td>
-        <td>{place['place name']}</td>
-        <td>{place.state}/{place['state abbreviation']}</td>
-        <td>{place.latitude}</td>
-        <td>{place.longitude}</td>
-      </tr>
+      <TableItem {...tableItemProps} key={id}/>
   );
 
   return (
     <Table striped bordered hover variant="dark">
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>zip</th>
-          <th>country</th>
-          <th>country Abbreviation</th>
-          <th>place name</th>
-          <th>state</th>
-          <th>latitude</th>
-          <th>longitude</th>
-        </tr>
-      </thead>
+      <TableHead />
       <tbody>
         {tableItem}
       </tbody>
