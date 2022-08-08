@@ -12,17 +12,26 @@ The system displays the last 5 codes searched, and allows the user to clear this
 
 Docker, NodeJS v14.20.0
 
+
+## Installation
+To run the app just:
+```
+$ docker-compose up
+```
+
+[Access frontend](http://localhost:3000)
+
+[Access Graphql](http://localhost:4000)
+
+Search for the zipcode
+
 ## Test
 with node v14.20.0
 ```
 $ cd frontend
 $ yarn test
 ```
-## Installation
-To run the app just:
-```
-$ docker-compose up
-```
+
 
 ## Future Improvements
 - I need to improve the typescript with this for example:
